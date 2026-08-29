@@ -131,6 +131,22 @@ def can_chi_ngay(d: date):
     return can, chi
 
 
+def can_chi_nam(lunar_year: int):
+    """Tra ve (Can, Chi) cua nam am lich."""
+    can = CAN[(lunar_year + 6) % 10]
+    chi = CHI[(lunar_year + 8) % 12]
+    return can, chi
+
+
+def can_chi_thang(lunar_month: int, lunar_year: int):
+    """Tra ve (Can, Chi) cua thang am lich, theo quy tac Ngu Ho Don."""
+    can_nam_idx = (lunar_year + 6) % 10
+    can_thang1_idx = ((can_nam_idx % 5) * 2 + 2) % 10
+    can_idx = (can_thang1_idx + (lunar_month - 1)) % 10
+    chi_idx = (lunar_month + 1) % 12
+    return CAN[can_idx], CHI[chi_idx]
+
+
 def is_chi_ty(d: date) -> bool:
     jd = jd_from_date(d.day, d.month, d.year)
     return (jd + 1) % 12 == TY_INDEX

@@ -5,8 +5,10 @@ from proverbs import proverb_of_day
 
 def build_message() -> str:
     today = date.today()
-    can, chi = lunar.can_chi_ngay(today)
+    can_ngay, chi_ngay = lunar.can_chi_ngay(today)
     ld, lm, ly, leap = lunar.solar_to_lunar(today.day, today.month, today.year)
+    can_thang, chi_thang = lunar.can_chi_thang(lm, ly)
+    can_nam, chi_nam = lunar.can_chi_nam(ly)
 
     ty = lunar.next_ngay_ty(today)
     m1 = lunar.next_mung_1(today)
@@ -20,7 +22,7 @@ def build_message() -> str:
 
     lines = [
         f"📅 Hôm nay {today.strftime('%d/%m/%Y')} — Âm lịch {ld}/{lm}{' nhuận' if leap else ''}/{ly}",
-        f"Ngày {can} {chi}",
+        f"Ngày {can_ngay} {chi_ngay}, tháng {can_thang} {chi_thang}, năm {can_nam} {chi_nam}",
         "",
         f"🐍 Ngày Tỵ sắp tới: {fmt(ty)}",
         f"🌑 Mùng 1 sắp tới: {fmt(m1)}",
