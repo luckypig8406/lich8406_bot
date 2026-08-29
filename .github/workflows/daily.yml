@@ -2,8 +2,8 @@ name: Nhac ngay Ty - Ram - Mung 1
 
 on:
   schedule:
-    # 00:00 UTC = 07:00 gio Viet Nam
-    - cron: "0 0 * * *"
+    # 01:00 UTC = 08:00 gio Viet Nam
+    - cron: "0 1 * * *"
   workflow_dispatch: {}   # cho phep bam nut "Run workflow" tren GitHub de test tay
 
 jobs:
