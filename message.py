@@ -1,7 +1,18 @@
 from datetime import date
+import random
 import lunar
-from proverbs import proverb_of_day
-from quotes import quote_of_day
+from proverbs import PROVERBS
+from quotes import QUOTES
+
+# Gop chung tuc ngu (khong co tac gia) va quote (co tac gia) thanh 1 kho duy nhat.
+# Moi phan tu chuan hoa thanh (cau, tac_gia_hoac_None).
+CAU_HAY = [(p, None) for p in PROVERBS] + [(c, a) for c, a in QUOTES]
+
+
+def cau_hay_of_day(d: date = None):
+    d = d or date.today()
+    rng = random.Random(d.toordinal())
+    return rng.choice(CAU_HAY)
 
 
 def build_message() -> str:
@@ -31,10 +42,12 @@ def build_message() -> str:
         f"🌑 Mùng 1 sắp tới: {fmt(m1)}",
         f"🌕 Rằm sắp tới: {fmt(ram)}",
         "",
-        f"📖 {proverb_of_day(today)}",
     ]
 
-    cau, tac_gia = quote_of_day(today)
-    lines += ["", f"💬 “{cau}”", f"— {tac_gia}"]
+    cau, tac_gia = cau_hay_of_day(today)
+    if tac_gia:
+        lines += [f"💬 “{cau}”", f"— {tac_gia}"]
+    else:
+        lines += [f"📖 {cau}"]
 
     return "\n".join(lines)
