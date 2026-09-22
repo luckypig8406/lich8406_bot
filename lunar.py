@@ -172,6 +172,17 @@ def next_ngay_ty(from_date: date = None):
     return find_next(is_chi_ty, from_date, max_days=15)
 
 
+def next_ngay_can(can_target: str, from_date: date = None):
+    """Tim ngay gan nhat co Can = can_target (VD: 'Ất'). Can lap lai moi 10 ngay."""
+    from_date = from_date or date.today()
+
+    def is_can(d: date) -> bool:
+        can, _ = can_chi_ngay(d)
+        return can == can_target
+
+    return find_next(is_can, from_date, max_days=12)
+
+
 def next_mung_1(from_date: date = None):
     from_date = from_date or date.today()
     return find_next(lambda d: lunar_day_of(d) == 1, from_date, max_days=35)

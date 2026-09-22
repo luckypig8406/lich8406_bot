@@ -2,9 +2,11 @@
 
 Mỗi ngày 8h sáng (giờ VN), GitHub tự động chạy 1 script gửi tin nhắn Telegram cho bạn báo:
 - 🐍 Ngày Tỵ sắp tới
+- 🈺 Ngày Ất sắp tới
 - 🌑 Mùng 1 sắp tới
 - 🌕 Rằm sắp tới
 - 📖 Một câu ca dao / tục ngữ Việt Nam, chọn ngẫu nhiên mỗi ngày (375 câu)
+- 💬 Một câu quote hay của Oscar Wilde, chọn ngẫu nhiên mỗi ngày (183 câu, do bạn tự tổng hợp)
 
 ## Bước 1 — Tạo bot Telegram
 1. Mở Telegram, chat với **@BotFather**
@@ -21,6 +23,7 @@ Cấu trúc file cần có trong repo:
 .github/workflows/daily.yml
 lunar.py
 proverbs.py
+quotes.py
 message.py
 notify.py
 requirements.txt
@@ -53,6 +56,9 @@ Sửa dòng `cron` trong `.github/workflows/daily.yml`. Cron chạy theo giờ U
 
 ## Câu tục ngữ / ca dao mỗi ngày
 Nằm trong `proverbs.py` — 375 câu ca dao, tục ngữ Việt Nam. Mỗi ngày bot chọn ngẫu nhiên 1 câu (chọn ổn định theo ngày, nên trong cùng 1 ngày gọi lại vẫn ra cùng 1 câu, nhưng đổi khác vào ngày khác). Muốn thêm/sửa câu, chỉnh trực tiếp list `PROVERBS` trong file đó.
+
+## Câu quote mỗi ngày
+Nằm trong `quotes.py` — 183 câu quote do bạn tự tổng hợp (hiện đang là quote của Oscar Wilde), mỗi ngày bot chọn ngẫu nhiên 1 câu, kèm tên tác giả. Muốn thêm bộ quote khác hoặc bổ sung thêm, chỉnh trực tiếp list `QUOTES` trong file đó — mỗi phần tử là `(câu, tác giả)`.
 
 ## Ghi chú
 - `lunar.py`: tự chuyển đổi Dương lịch ↔ Âm lịch Việt Nam (thuật toán Hồ Ngọc Đức).
